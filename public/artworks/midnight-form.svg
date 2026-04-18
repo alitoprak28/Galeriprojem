@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" fill="none">
+  <rect width="1200" height="1500" fill="#06080B" />
+  <rect x="76" y="76" width="1048" height="1348" stroke="url(#frame)" opacity="0.16" />
+  <ellipse cx="604" cy="1162" rx="430" ry="108" fill="url(#floor)" />
+  <ellipse cx="690" cy="416" rx="336" ry="336" fill="url(#glow)" />
+  <path d="M186 1016C236 1004 296 986 364 961C438 935 489 900 519 859L605 737C628 705 665 684 708 679L827 665C878 659 918 673 948 707L1012 778C1046 796 1071 829 1088 877L1044 891C1026 851 1002 824 972 808L909 740C886 716 855 707 818 711L701 725C671 729 646 741 628 762L545 881C508 931 448 969 367 996C304 1017 246 1032 192 1042L186 1016Z" fill="url(#body)" />
+  <path d="M317 1016H1030" stroke="#F6F0E6" stroke-opacity="0.14" stroke-width="4" />
+  <path d="M381 932C441 910 489 875 523 826L601 712C624 679 661 659 705 654L822 643C877 638 923 655 960 692L1018 751" stroke="#FFF7EA" stroke-opacity="0.24" stroke-width="12" stroke-linecap="round" />
+  <path d="M564 799L693 787" stroke="#0D1218" stroke-opacity="0.7" stroke-width="52" stroke-linecap="round" />
+  <path d="M727 783L884 768" stroke="#11161B" stroke-opacity="0.68" stroke-width="58" stroke-linecap="round" />
+  <circle cx="423" cy="1008" r="84" fill="#080B0E" />
+  <circle cx="423" cy="1008" r="56" stroke="#C8B492" stroke-opacity="0.38" stroke-width="8" />
+  <circle cx="900" cy="1008" r="84" fill="#080B0E" />
+  <circle cx="900" cy="1008" r="56" stroke="#C8B492" stroke-opacity="0.38" stroke-width="8" />
+  <path d="M368 1033C434 1038 491 1012 540 957" stroke="#B39A77" stroke-opacity="0.22" stroke-width="18" stroke-linecap="round" filter="url(#blur)" />
+  <defs>
+    <linearGradient id="frame" x1="76" y1="76" x2="1124" y2="1424" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EEE3D2" />
+      <stop offset="1" stop-color="#6E6558" />
+    </linearGradient>
+    <linearGradient id="body" x1="304" y1="649" x2="1027" y2="1008" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3C454F" />
+      <stop offset="0.48" stop-color="#9FA7B0" />
+      <stop offset="1" stop-color="#1D232A" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(690 416) rotate(90) scale(336)">
+      <stop stop-color="#C7B194" stop-opacity="0.38" />
+      <stop offset="1" stop-color="#06080B" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="floor" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(604 1162) rotate(90) scale(108 430)">
+      <stop stop-color="#D6C0A0" stop-opacity="0.18" />
+      <stop offset="1" stop-color="#06080B" stop-opacity="0" />
+    </radialGradient>
+    <filter id="blur" x="308" y="897" width="292" height="172" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="18" />
+    </filter>
+  </defs>
+</svg>
+

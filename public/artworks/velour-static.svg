@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" fill="none">
+  <rect width="1600" height="900" fill="#070708" />
+  <rect x="78" y="78" width="1444" height="744" stroke="#E8E0D2" opacity="0.14" />
+  <ellipse cx="872" cy="694" rx="498" ry="92" fill="url(#floor)" />
+  <ellipse cx="1218" cy="244" rx="286" ry="152" fill="url(#glow)" />
+  <path d="M196 644C300 641 404 630 508 611L627 589C711 574 809 564 920 560L1038 557C1127 554 1204 575 1269 620L1375 660C1413 676 1442 704 1462 744H1380C1363 714 1339 692 1308 678L1207 642C1154 612 1096 598 1034 600L910 603C812 606 721 615 636 632L517 656C413 677 308 687 201 690L196 644Z" fill="url(#body)" />
+  <path d="M362 608C470 604 572 592 668 571L767 549C846 531 929 522 1018 522H1097C1179 522 1254 545 1320 591L1400 627" stroke="#FAF6F0" stroke-opacity="0.22" stroke-width="12" stroke-linecap="round" />
+  <path d="M708 621H1184" stroke="#101214" stroke-opacity="0.74" stroke-width="72" stroke-linecap="round" />
+  <circle cx="544" cy="706" r="74" fill="#0A0A0B" />
+  <circle cx="544" cy="706" r="48" stroke="#D0B791" stroke-opacity="0.34" stroke-width="8" />
+  <circle cx="1188" cy="706" r="74" fill="#0A0A0B" />
+  <circle cx="1188" cy="706" r="48" stroke="#D0B791" stroke-opacity="0.34" stroke-width="8" />
+  <path d="M426 736H1330" stroke="#F2EBDF" stroke-opacity="0.1" stroke-width="4" />
+  <path d="M1098 466L1274 466" stroke="#E6D2B3" stroke-opacity="0.2" stroke-width="10" stroke-linecap="round" filter="url(#light)" />
+  <defs>
+    <linearGradient id="body" x1="302" y1="557" x2="1420" y2="744" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2E2F31" />
+      <stop offset="0.48" stop-color="#9C8B70" />
+      <stop offset="1" stop-color="#171718" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1218 244) rotate(90) scale(152 286)">
+      <stop stop-color="#B89C76" stop-opacity="0.34" />
+      <stop offset="1" stop-color="#070708" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="floor" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(872 694) rotate(90) scale(92 498)">
+      <stop stop-color="#C7AF8A" stop-opacity="0.14" />
+      <stop offset="1" stop-color="#070708" stop-opacity="0" />
+    </radialGradient>
+    <filter id="light" x="1056" y="424" width="260" height="84" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="16" />
+    </filter>
+  </defs>
+</svg>
+
