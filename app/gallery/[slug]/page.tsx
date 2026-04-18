@@ -21,6 +21,8 @@ type PageProps = {
   };
 };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return vehicles.map((vehicle) => ({
     slug: vehicle.slug
