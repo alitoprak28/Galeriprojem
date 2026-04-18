@@ -79,11 +79,11 @@ export function InventoryBrowser({
         <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
           <div className="space-y-2">
             <p className="eyebrow">Hızlı filtreleme</p>
-            <h3 className="font-display text-3xl uppercase tracking-[-0.04em] sm:text-4xl">
+            <h3 className="font-display text-[2rem] uppercase tracking-[-0.04em] sm:text-4xl">
               Çok araç içinde doğru aracı kısa sürede bulun.
             </h3>
           </div>
-          <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] text-muted">
+          <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-muted sm:text-[11px] sm:tracking-[0.28em]">
             <SlidersHorizontal className="h-4 w-4" />
             {filteredVehicles.length} araç bulundu
           </div>
@@ -92,7 +92,7 @@ export function InventoryBrowser({
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[1.3fr_0.8fr_0.8fr_0.8fr_0.8fr]">
           <label className="space-y-2">
             <span className="text-[10px] uppercase tracking-[0.28em] text-muted">Arama</span>
-            <div className="flex items-center gap-3 border border-foreground/10 bg-background/60 px-4 py-3">
+            <div className="flex min-h-12 items-center gap-3 border border-foreground/10 bg-background/60 px-4 py-3">
               <Search className="h-4 w-4 text-muted" />
               <input
                 value={query}

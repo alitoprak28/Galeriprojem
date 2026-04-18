@@ -85,7 +85,7 @@ export function HeroSearchPanel() {
 
       <button
         type="submit"
-        className="inline-flex items-center justify-center gap-3 border border-accent bg-accent px-5 py-3 text-xs uppercase tracking-[0.28em] text-white transition hover:opacity-90"
+        className="inline-flex min-h-12 items-center justify-center gap-3 border border-accent bg-accent px-5 py-3 text-xs uppercase tracking-[0.22em] text-white transition hover:opacity-90 sm:min-h-0 sm:tracking-[0.28em]"
       >
         Stok Ara
         <Search className="h-4 w-4" />

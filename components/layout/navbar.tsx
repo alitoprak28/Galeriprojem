@@ -35,16 +35,16 @@ export function Navbar() {
       <div className="page-shell pt-4 sm:pt-6">
         <div
           className={cn(
-            "flex items-center justify-between gap-4 border bg-background px-4 py-3 transition-all duration-300 sm:px-6",
+            "flex items-center justify-between gap-3 border bg-background px-3 py-3 transition-all duration-300 sm:px-6",
             scrolled
               ? "border-foreground/10 shadow-panel"
               : "border-foreground/10"
           )}
         >
-          <Link href="/" className="group inline-flex items-center gap-3">
+          <Link href="/" className="group inline-flex min-w-0 items-center gap-3">
             <span className="h-2.5 w-2.5 rounded-sm bg-accent" />
-            <div>
-              <p className="font-display text-base uppercase tracking-[0.16em] text-foreground sm:text-xl">
+            <div className="min-w-0">
+              <p className="truncate font-display text-[13px] uppercase tracking-[0.14em] text-foreground sm:text-xl">
                 {dealershipInfo.name}
               </p>
               <p className="hidden text-[10px] font-medium uppercase tracking-[0.22em] text-muted sm:block sm:text-[11px]">
@@ -53,7 +53,7 @@ export function Navbar() {
             </div>
           </Link>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <nav className="hidden items-center gap-5 lg:flex">
               {links.map((link) => {
                 const active = link.href === "/gallery" ? pathname === "/gallery" : false;
@@ -75,12 +75,25 @@ export function Navbar() {
 
             <a
               href={`tel:${dealershipInfo.phoneRaw}`}
-              className="inline-flex items-center gap-2 border border-foreground/10 bg-foreground/[0.04] px-4 py-2 text-[10px] font-medium uppercase tracking-[0.2em] text-foreground transition hover:border-foreground/20 hover:bg-foreground/[0.08] sm:text-[11px]"
+              className="inline-flex items-center gap-2 border border-foreground/10 bg-foreground/[0.04] px-3 py-2 text-[10px] font-medium uppercase tracking-[0.18em] text-foreground transition hover:border-foreground/20 hover:bg-foreground/[0.08] sm:px-4 sm:text-[11px]"
             >
               <PhoneCall className="h-4 w-4" />
-              {dealershipInfo.phoneDisplay}
+              <span className="hidden sm:inline">{dealershipInfo.phoneDisplay}</span>
+              <span className="sm:hidden">Ara</span>
             </a>
           </div>
+        </div>
+
+        <div className="mt-3 flex gap-2 overflow-x-auto pb-1 lg:hidden">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="whitespace-nowrap border border-foreground/10 bg-panel px-3 py-2 text-[10px] font-medium uppercase tracking-[0.18em] text-muted transition hover:text-foreground"
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
       </div>
     </motion.header>

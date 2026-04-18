@@ -25,7 +25,7 @@ export function VehicleListItem({
       className="border border-foreground/10 bg-panel shadow-panel"
     >
       <div className="grid gap-4 p-4 sm:p-5 lg:grid-cols-[220px_1.1fr_0.9fr_auto] lg:items-center lg:gap-5">
-        <Link href={`/gallery/${vehicle.slug}`} className="relative block h-40 overflow-hidden border border-foreground/10 bg-foreground/[0.03] sm:h-44 lg:h-36">
+        <Link href={`/gallery/${vehicle.slug}`} className="relative block h-48 overflow-hidden border border-foreground/10 bg-foreground/[0.03] sm:h-44 lg:h-36">
           <Image
             src={vehicle.image}
             alt={vehicle.title}
@@ -43,7 +43,7 @@ export function VehicleListItem({
 
         <div className="space-y-3">
           <div className="space-y-2">
-            <div className="flex flex-wrap items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-muted">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[10px] uppercase tracking-[0.18em] text-muted sm:text-[11px] sm:tracking-[0.22em]">
               <span>{vehicle.brand}</span>
               <span className="h-1 w-1 rounded-full bg-muted/40" />
               <span>{vehicle.bodyStyle}</span>
@@ -51,18 +51,18 @@ export function VehicleListItem({
               <span>{vehicle.eyebrow}</span>
             </div>
             <Link href={`/gallery/${vehicle.slug}`} className="inline-block">
-              <h3 className="font-display text-3xl uppercase tracking-[-0.04em] text-foreground sm:text-[2rem]">
+              <h3 className="text-balance font-display text-[2rem] uppercase tracking-[-0.04em] text-foreground sm:text-[2rem]">
                 {vehicle.title}
               </h3>
             </Link>
-            <p className="max-w-2xl text-sm leading-7 text-muted">{vehicle.tagline}</p>
+            <p className="max-w-2xl text-sm leading-6 text-muted sm:leading-7">{vehicle.tagline}</p>
           </div>
 
           <div className="flex flex-wrap gap-2">
             {[vehicle.mileage, vehicle.fuel, vehicle.transmission, vehicle.power].map((item) => (
               <span
                 key={item}
-                className="rounded border border-foreground/10 bg-foreground/[0.03] px-3 py-2 text-[11px] uppercase tracking-[0.18em] text-muted"
+                className="rounded border border-foreground/10 bg-foreground/[0.03] px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-muted sm:text-[11px] sm:tracking-[0.18em]"
               >
                 {item}
               </span>
@@ -70,10 +70,10 @@ export function VehicleListItem({
           </div>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-1">
           <div className="border border-foreground/10 bg-foreground/[0.03] px-4 py-3">
             <p className="text-[10px] uppercase tracking-[0.24em] text-muted">Fiyat</p>
-            <p className="mt-2 font-display text-3xl uppercase tracking-[-0.04em] text-foreground">
+            <p className="mt-2 font-display text-[1.8rem] uppercase tracking-[-0.04em] text-foreground sm:text-3xl">
               {vehicle.price}
             </p>
           </div>
@@ -83,7 +83,7 @@ export function VehicleListItem({
           </div>
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-1">
           <Link
             href={`/gallery/${vehicle.slug}`}
             className="inline-flex items-center justify-center gap-3 border border-foreground/10 bg-foreground/[0.04] px-5 py-3 text-xs uppercase tracking-[0.24em] text-foreground transition hover:border-foreground/20 hover:bg-foreground/[0.08]"
@@ -103,4 +103,3 @@ export function VehicleListItem({
     </motion.article>
   );
 }
-

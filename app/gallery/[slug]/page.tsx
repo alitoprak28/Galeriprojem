@@ -82,7 +82,7 @@ export default function VehicleDetailPage({ params }: PageProps) {
           <Reveal>
             <Link
               href="/gallery"
-              className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-muted transition hover:text-foreground"
+              className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.22em] text-muted transition hover:text-foreground sm:text-xs sm:tracking-[0.28em]"
             >
               <ArrowLeft className="h-4 w-4" />
               Stok listesine dön
@@ -90,7 +90,7 @@ export default function VehicleDetailPage({ params }: PageProps) {
           </Reveal>
 
           <div className="grid gap-8 xl:grid-cols-[1.15fr_0.85fr]">
-            <Reveal className="relative min-h-[24rem] overflow-hidden border border-foreground/10 bg-panel shadow-panel sm:min-h-[30rem]">
+            <Reveal className="relative min-h-[18rem] overflow-hidden border border-foreground/10 bg-panel shadow-panel sm:min-h-[30rem]">
               <ParallaxMedia
                 src={vehicle.image}
                 alt={vehicle.title}
@@ -105,12 +105,12 @@ export default function VehicleDetailPage({ params }: PageProps) {
                   <p className="text-[11px] uppercase tracking-[0.22em] text-white/70">
                     {vehicle.eyebrow}
                   </p>
-                  <h1 className="mt-2 font-display text-4xl uppercase tracking-[-0.05em] text-white sm:text-5xl">
+                  <h1 className="mt-2 text-balance font-display text-[2.4rem] uppercase tracking-[-0.05em] text-white sm:text-5xl">
                     {vehicle.title}
                   </h1>
                 </div>
                 <div className="text-left sm:text-right">
-                  <p className="font-display text-3xl uppercase tracking-[-0.04em] text-white sm:text-4xl">
+                  <p className="font-display text-[2rem] uppercase tracking-[-0.04em] text-white sm:text-4xl">
                     {vehicle.price}
                   </p>
                   <p className="mt-2 text-[11px] uppercase tracking-[0.22em] text-white/70">
@@ -123,7 +123,7 @@ export default function VehicleDetailPage({ params }: PageProps) {
             <div className="space-y-5">
               <Reveal className="border border-foreground/10 bg-panel p-5 shadow-panel sm:p-6">
                 <span className="eyebrow">Araç Özeti</span>
-                <p className="mt-4 text-base leading-7 text-muted sm:text-lg">{vehicle.tagline}</p>
+                <p className="mt-4 text-[15px] leading-7 text-muted sm:text-lg">{vehicle.tagline}</p>
 
                 <div className="mt-6 grid gap-3 sm:grid-cols-2">
                   {detailRows.map(([label, value]) => (
@@ -148,14 +148,14 @@ export default function VehicleDetailPage({ params }: PageProps) {
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">
                   <a
                     href={whatsappHref}
-                    className="inline-flex items-center justify-center gap-3 border border-accent bg-accent px-5 py-4 text-xs uppercase tracking-[0.28em] text-white transition hover:opacity-90"
+                    className="inline-flex min-h-12 items-center justify-center gap-3 border border-accent bg-accent px-5 py-4 text-xs uppercase tracking-[0.22em] text-white transition hover:opacity-90 sm:tracking-[0.28em]"
                   >
                     WhatsApp'tan Sor
                     <MessageSquareText className="h-4 w-4" />
                   </a>
                   <a
                     href={`tel:${dealershipInfo.phoneRaw}`}
-                    className="inline-flex items-center justify-center gap-3 border border-foreground/10 px-5 py-4 text-xs uppercase tracking-[0.28em] text-foreground transition hover:border-foreground/20 hover:bg-foreground/[0.05]"
+                    className="inline-flex min-h-12 items-center justify-center gap-3 border border-foreground/10 px-5 py-4 text-xs uppercase tracking-[0.22em] text-foreground transition hover:border-foreground/20 hover:bg-foreground/[0.05] sm:tracking-[0.28em]"
                   >
                     Hemen Ara
                     <PhoneCall className="h-4 w-4" />
@@ -188,8 +188,8 @@ export default function VehicleDetailPage({ params }: PageProps) {
 
           <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
             <Reveal className="space-y-5 border border-foreground/10 bg-panel p-5 shadow-panel sm:p-6">
-              <p className="text-base leading-8 text-muted">{vehicle.description}</p>
-              <p className="text-base leading-8 text-muted">{vehicle.narrative}</p>
+              <p className="text-[15px] leading-7 text-muted sm:text-base sm:leading-8">{vehicle.description}</p>
+              <p className="text-[15px] leading-7 text-muted sm:text-base sm:leading-8">{vehicle.narrative}</p>
               <p className="text-sm leading-7 text-muted">{vehicle.priceNote}</p>
             </Reveal>
 
