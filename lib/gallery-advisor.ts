@@ -109,13 +109,17 @@ function parsePrice(value: string) {
 
 function parseBudget(text: string) {
   const normalized = normalizeText(text).replace(/\s+/g, " ");
-  const millionMatch = normalized.match(/(\d+(?:[.,]\d+)?)\s*(milyon|m)\b/);
+  const millionMatch = normalized.match(
+    /(\d+(?:[.,]\d+)?)\s*(milyon|m)(?:luk|lik|a|e|u|u?n|i|i?n|dan|den|kadar)?\b/
+  );
 
   if (millionMatch) {
     return Math.round(Number(millionMatch[1].replace(",", ".")) * 1_000_000);
   }
 
-  const thousandMatch = normalized.match(/(\d+(?:[.,]\d+)?)\s*bin\b/);
+  const thousandMatch = normalized.match(
+    /(\d+(?:[.,]\d+)?)\s*bin(?:lik|luk|e|a|den|dan|kadar)?\b/
+  );
 
   if (thousandMatch) {
     return Math.round(Number(thousandMatch[1].replace(",", ".")) * 1_000);
@@ -395,12 +399,21 @@ function toRecommendation(vehicle: Vehicle, preferences: AdvisorPreferences): Ad
 }
 
 function recommendVehicles(preferences: AdvisorPreferences) {
-  return [...vehicles]
+  const scored = [...vehicles]
     .map((vehicle) => ({
       vehicle,
       score: scoreVehicle(vehicle, preferences)
     }))
-    .filter((item) => item.score > -1)
+    .filter((item) => item.score > -1);
+
+  const budgetMax = preferences.budgetMax;
+  const budgetAwareMatches = budgetMax
+    ? scored.filter((item) => parsePrice(item.vehicle.price) <= budgetMax * 1.15)
+    : scored;
+
+  const candidates = budgetAwareMatches.length > 0 ? budgetAwareMatches : scored;
+
+  return candidates
     .sort((first, second) => second.score - first.score)
     .slice(0, 3)
     .map((item) => toRecommendation(item.vehicle, preferences));
