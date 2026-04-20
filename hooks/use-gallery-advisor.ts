@@ -30,6 +30,10 @@ export function useGalleryAdvisor() {
   }, []);
 
   function queueAssistantReply(userText: string, nextPreferences: AdvisorPreferences) {
+    if (timerRef.current) {
+      window.clearTimeout(timerRef.current);
+    }
+
     setIsThinking(true);
     setError(null);
 
@@ -48,6 +52,8 @@ export function useGalleryAdvisor() {
       } catch {
         setIsThinking(false);
         setError("Su an kisa bir aksilik oldu. Isterseniz tekrar deneyin.");
+      } finally {
+        timerRef.current = null;
       }
     }, thinkingDelayMs);
   }

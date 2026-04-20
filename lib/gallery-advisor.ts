@@ -14,6 +14,7 @@ export type AdvisorRecommendation = {
 export type AdvisorAction = {
   label: string;
   href: string;
+  tone?: "primary" | "secondary";
 };
 
 export type AdvisorMessage = {
@@ -32,8 +33,8 @@ export type AdvisorQuickAction = {
 
 export type AdvisorPreferences = {
   budgetMax?: number;
-  bodyStyle?: "SUV" | "Sedan" | "Coupe" | "Crossover";
-  fuel?: "Benzin" | "Dizel";
+  bodyStyle?: "SUV" | "Sedan" | "Coupe" | "Crossover" | "Performance Wagon";
+  fuel?: "Benzin" | "Dizel" | "Mild Hybrid Benzin";
   brand?: string;
   useCase?: "family" | "city" | "long" | "premium";
   electricRequested?: boolean;
@@ -45,43 +46,45 @@ export const advisorQuickActions: AdvisorQuickAction[] = [
   {
     id: "budget",
     label: "Butceme uygun arac bul",
-    prompt: "Butceme uygun arac bulmama yardimci olur musun?"
+    prompt: "Butceme uygun bir arac bakiyorum."
   },
   {
     id: "suv",
-    label: "SUV arac oner",
-    prompt: "SUV arac onerir misin?"
+    label: "SUV arac bakiyorum",
+    prompt: "SUV bir arac bakiyorum."
   },
   {
     id: "electric",
-    label: "Elektrikli arac goster",
-    prompt: "Elektrikli arac gosterir misin?"
+    label: "Elektrikli arac sor",
+    prompt: "Elektrikli bir arac bakiyorum."
   },
   {
     id: "premium",
-    label: "Premium araclari listele",
-    prompt: "Premium araclara bakiyorum."
+    label: "Premium arac bakiyorum",
+    prompt: "Premium bir arac bakiyorum."
   },
   {
     id: "family",
-    label: "Aile icin arac oner",
-    prompt: "Aile kullanimi icin genis bir arac bakiyorum."
+    label: "Aile icin arac ariyorum",
+    prompt: "Aile icin genis bir arac bakiyorum."
   },
   {
     id: "contact",
     label: "Hizli iletisime gec",
-    prompt: "Hizli iletisime gecmek istiyorum."
+    prompt: "Satis ekibiyle hizli iletisime gecmek istiyorum."
   }
 ];
 
-const startActions: AdvisorAction[] = [
+const contactActions: AdvisorAction[] = [
   {
-    label: "WhatsApp ile iletisime gec",
-    href: dealershipInfo.whatsapp
+    label: "WhatsApp ile sor",
+    href: dealershipInfo.whatsapp,
+    tone: "primary"
   },
   {
     label: "Telefonla ara",
-    href: `tel:${dealershipInfo.phoneRaw}`
+    href: `tel:${dealershipInfo.phoneRaw}`,
+    tone: "secondary"
   }
 ];
 
@@ -89,8 +92,8 @@ export const initialAdvisorMessage: AdvisorMessage = {
   id: "welcome",
   role: "assistant",
   text:
-    "Merhaba, ben Galeri Danismani. Butcenize ve kullanim amaciniza gore size uygun araclari kisa sorularla onerebilirim.",
-  actions: startActions
+    "Merhaba, ben Galeri Danismani. Butcenizi, kasa tercihinizi ya da kullanim amacinizi yazin; size stoktan uygun araclari ayirayim.",
+  actions: contactActions
 };
 
 function normalizeText(value: string) {
@@ -142,6 +145,10 @@ function detectBodyStyle(text: string): AdvisorPreferences["bodyStyle"] | undefi
     return "Coupe";
   }
 
+  if (normalized.includes("wagon") || normalized.includes("station")) {
+    return "Performance Wagon";
+  }
+
   if (normalized.includes("crossover") || normalized.includes("hatchback")) {
     return "Crossover";
   }
@@ -154,6 +161,10 @@ function detectFuel(text: string): AdvisorPreferences["fuel"] | undefined {
 
   if (normalized.includes("dizel")) {
     return "Dizel";
+  }
+
+  if (normalized.includes("hybrid") || normalized.includes("hibrit")) {
+    return "Mild Hybrid Benzin";
   }
 
   if (normalized.includes("benzin")) {
@@ -180,9 +191,9 @@ function detectUseCase(text: string): AdvisorPreferences["useCase"] | undefined 
 
   if (
     normalized.includes("premium") ||
-    normalized.includes("lux") ||
+    normalized.includes("prestij") ||
     normalized.includes("ust segment") ||
-    normalized.includes("prestij")
+    normalized.includes("makam")
   ) {
     return "premium";
   }
@@ -257,10 +268,12 @@ function scoreVehicle(vehicle: Vehicle, preferences: AdvisorPreferences) {
   const vehiclePrice = parsePrice(vehicle.price);
 
   if (preferences.budgetMax) {
-    if (vehiclePrice <= preferences.budgetMax * 1.1) {
+    if (vehiclePrice <= preferences.budgetMax * 1.08) {
       score += 5;
-    } else if (vehiclePrice <= preferences.budgetMax * 1.25) {
-      score += 2;
+    } else if (vehiclePrice <= preferences.budgetMax * 1.18) {
+      score += 3;
+    } else if (vehiclePrice <= preferences.budgetMax * 1.3) {
+      score += 1;
     } else {
       score -= 4;
     }
@@ -273,6 +286,11 @@ function scoreVehicle(vehicle: Vehicle, preferences: AdvisorPreferences) {
   if (preferences.fuel) {
     if (normalizeText(vehicle.fuel).includes(normalizeText(preferences.fuel))) {
       score += 4;
+    } else if (
+      preferences.fuel === "Benzin" &&
+      normalizeText(vehicle.fuel).includes(normalizeText("Mild Hybrid Benzin"))
+    ) {
+      score += 2;
     } else {
       score -= 2;
     }
@@ -298,10 +316,10 @@ function scoreVehicle(vehicle: Vehicle, preferences: AdvisorPreferences) {
 
   if (preferences.useCase === "city") {
     if (vehicle.bodyStyle.includes("Sedan") || vehicle.bodyStyle.includes("Crossover")) {
-      score += 2;
+      score += 3;
     }
 
-    if (vehiclePrice <= 2_500_000) {
+    if (vehiclePrice <= 3_000_000) {
       score += 2;
     }
   }
@@ -335,15 +353,15 @@ function buildReason(vehicle: Vehicle, preferences: AdvisorPreferences) {
   const reasons: string[] = [];
 
   if (preferences.budgetMax && parsePrice(vehicle.price) <= preferences.budgetMax * 1.1) {
-    reasons.push("butceye yakin");
+    reasons.push("Butcenize yakin");
   }
 
   if (preferences.bodyStyle && matchesBodyStyle(vehicle, preferences.bodyStyle)) {
-    reasons.push("aradiginiz kasa tipine uygun");
+    reasons.push("Kasa tercihinize uygun");
   }
 
   if (preferences.fuel && normalizeText(vehicle.fuel).includes(normalizeText(preferences.fuel))) {
-    reasons.push(`${preferences.fuel.toLocaleLowerCase("tr")} tercihinize uyuyor`);
+    reasons.push(`${preferences.fuel} tercihinize uygun`);
   }
 
   if (preferences.brand && vehicle.brand === preferences.brand) {
@@ -351,18 +369,18 @@ function buildReason(vehicle: Vehicle, preferences: AdvisorPreferences) {
   }
 
   if (preferences.useCase === "family") {
-    reasons.push("aile kullanimi icin ferah");
+    reasons.push("Aile kullanimi icin ferah");
   }
 
   if (preferences.useCase === "premium") {
-    reasons.push("premium his veriyor");
+    reasons.push("Showroom tarafinda guclu bir secenek");
   }
 
   if (reasons.length === 0) {
-    reasons.push("stokta dikkat ceken bir secenek");
+    reasons.push("Stokta dikkat ceken bir secenek");
   }
 
-  return reasons.slice(0, 2).join(", ");
+  return reasons.slice(0, 2).join(" • ");
 }
 
 function toRecommendation(vehicle: Vehicle, preferences: AdvisorPreferences): AdvisorRecommendation {
@@ -383,8 +401,8 @@ function recommendVehicles(preferences: AdvisorPreferences) {
       score: scoreVehicle(vehicle, preferences)
     }))
     .filter((item) => item.score > -1)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 4)
+    .sort((first, second) => second.score - first.score)
+    .slice(0, 3)
     .map((item) => toRecommendation(item.vehicle, preferences));
 }
 
@@ -393,11 +411,100 @@ function needsContact(text: string) {
 
   return (
     normalized.includes("iletisim") ||
-    normalized.includes("arayin") ||
     normalized.includes("whatsapp") ||
     normalized.includes("telefon") ||
-    normalized.includes("ulas")
+    normalized.includes("arayin") ||
+    normalized.includes("ulasmak")
   );
+}
+
+function wantsRecommendations(text: string) {
+  const normalized = normalizeText(text);
+
+  return (
+    normalized.includes("oner") ||
+    normalized.includes("liste") ||
+    normalized.includes("goster") ||
+    normalized.includes("incele")
+  );
+}
+
+function countKnownPreferences(preferences: AdvisorPreferences) {
+  let count = 0;
+
+  if (preferences.budgetMax) {
+    count += 1;
+  }
+
+  if (preferences.bodyStyle) {
+    count += 1;
+  }
+
+  if (preferences.fuel) {
+    count += 1;
+  }
+
+  if (preferences.brand) {
+    count += 1;
+  }
+
+  if (preferences.useCase) {
+    count += 1;
+  }
+
+  return count;
+}
+
+function formatBudget(budget: number) {
+  return `${budget.toLocaleString("tr-TR")} TL`;
+}
+
+function buildInventoryHref(preferences: AdvisorPreferences) {
+  const params = new URLSearchParams();
+
+  if (preferences.brand) {
+    params.set("brand", preferences.brand);
+  }
+
+  if (preferences.fuel === "Dizel" || preferences.fuel === "Mild Hybrid Benzin") {
+    params.set("fuel", preferences.fuel);
+  }
+
+  if (preferences.bodyStyle) {
+    params.set("q", preferences.bodyStyle);
+  } else if (preferences.useCase === "family") {
+    params.set("q", "SUV");
+  } else if (preferences.useCase === "city") {
+    params.set("q", "Sedan");
+  }
+
+  return `/gallery${params.toString() ? `?${params.toString()}` : ""}`;
+}
+
+function buildSummary(preferences: AdvisorPreferences) {
+  const parts: string[] = [];
+
+  if (preferences.budgetMax) {
+    parts.push(`${formatBudget(preferences.budgetMax)} civari`);
+  }
+
+  if (preferences.bodyStyle) {
+    parts.push(`${preferences.bodyStyle.toLocaleLowerCase("tr")} tipinde`);
+  }
+
+  if (preferences.useCase === "family") {
+    parts.push("aile kullanimina uygun");
+  }
+
+  if (preferences.useCase === "premium") {
+    parts.push("premium hissi guclu");
+  }
+
+  if (preferences.brand) {
+    parts.push(`${preferences.brand} odakli`);
+  }
+
+  return parts.length > 0 ? `${parts.join(", ")} bir arama icin` : "";
 }
 
 function askNextQuestion(preferences: AdvisorPreferences) {
@@ -410,11 +517,11 @@ function askNextQuestion(preferences: AdvisorPreferences) {
   }
 
   if (!preferences.fuel && !preferences.electricRequested) {
-    return "Yakitta benzin, dizel ya da farkli bir tercihiniz var mi?";
+    return "Yakitta benzin, dizel ya da hybrid gibi bir tercihiniz var mi?";
   }
 
   if (!preferences.brand) {
-    return "Belli bir marka dusunuyor musunuz, yoksa secenekleri karistirayim mi?";
+    return "Belli bir marka dusunuyor musunuz, yoksa stoktan karistirayim mi?";
   }
 
   return undefined;
@@ -425,7 +532,9 @@ export function createAdvisorReply(
   currentPreferences: AdvisorPreferences
 ): { nextPreferences: AdvisorPreferences; message: AdvisorMessage } {
   const nextPreferences = mergePreferences(currentPreferences, userText);
-  const normalized = normalizeText(userText);
+  const askQuestion = askNextQuestion(nextPreferences);
+  const recommendationIntent = wantsRecommendations(userText);
+  const knownPreferences = countKnownPreferences(nextPreferences);
 
   if (needsContact(userText)) {
     return {
@@ -434,8 +543,8 @@ export function createAdvisorReply(
         id: `assistant-contact-${Date.now()}`,
         role: "assistant",
         text:
-          "Isterseniz sizi hizlica satis ekibine yonlendireyim. WhatsApp veya telefonla aninda bilgi alabilirsiniz.",
-        actions: startActions
+          "Tabii. Satis ekibimize hemen gecebilirsiniz. WhatsApp ya da telefon tarafindan aninda destek alabilirsiniz.",
+        actions: contactActions
       }
     };
   }
@@ -447,30 +556,30 @@ export function createAdvisorReply(
         id: `assistant-electric-${Date.now()}`,
         role: "assistant",
         text:
-          "Su an stokta elektrikli arac gorunmuyor. Dilerseniz size dusuk tuketimli sedan veya SUV secenekleri gosterebilirim.",
+          "Su an vitrinde elektrikli arac gorunmuyor. Dilerseniz size dusuk tuketimli sedan ve SUV seceneklerini ayirayim.",
         actions: [
           {
             label: "SUV stoklarini ac",
-            href: "/gallery?body=SUV"
+            href: "/gallery?q=SUV",
+            tone: "secondary"
           },
           {
             label: "WhatsApp ile sor",
-            href: dealershipInfo.whatsapp
+            href: dealershipInfo.whatsapp,
+            tone: "primary"
           }
         ]
       }
     };
   }
 
-  const askQuestion = askNextQuestion(nextPreferences);
-
-  if (askQuestion && !normalized.includes("oner") && !normalized.includes("liste")) {
+  if (askQuestion && (!recommendationIntent || knownPreferences < 2)) {
     return {
       nextPreferences,
       message: {
         id: `assistant-question-${Date.now()}`,
         role: "assistant",
-        text: `Size daha net arac onerebilmem icin bir sey daha sorayim. ${askQuestion}`
+        text: `Size daha net arac ayirabilmem icin bir bilgi daha alayim. ${askQuestion}`
       }
     };
   }
@@ -484,21 +593,46 @@ export function createAdvisorReply(
         id: `assistant-empty-${Date.now()}`,
         role: "assistant",
         text:
-          "Bu filtrelere tam oturan stok bulamadim. Butceyi biraz esnetirsek ya da kasa tipini genisletirsek size daha iyi secenekler cikarabilirim.",
-        actions: startActions
+          "Bu kriterlere tam oturan stok cikmadi. Butceyi biraz esnetirsek ya da kasa tipini genisletirsek daha guclu secenekler cikarabilirim.",
+        actions: [
+          {
+            label: "Tum stoklari ac",
+            href: "/gallery",
+            tone: "secondary"
+          },
+          {
+            label: "WhatsApp ile sor",
+            href: dealershipInfo.whatsapp,
+            tone: "primary"
+          }
+        ]
       }
     };
   }
+
+  const summary = buildSummary(nextPreferences);
 
   return {
     nextPreferences,
     message: {
       id: `assistant-reco-${Date.now()}`,
       role: "assistant",
-      text:
-        "Size uygun olabilecek birkac araci ayirdim. Isterseniz detay sayfasina gecin ya da hizli bilgi icin bize yazin.",
+      text: summary
+        ? `${summary} size uygun olabilecek ilanlari ayirdim. Detaya gecebilir ya da hizli bilgi icin bize yazabilirsiniz.`
+        : "Size uygun olabilecek ilanlari ayirdim. Detaya gecebilir ya da hizli bilgi icin bize yazabilirsiniz.",
       recommendations,
-      actions: startActions
+      actions: [
+        {
+          label: "Uygun stoklari ac",
+          href: buildInventoryHref(nextPreferences),
+          tone: "secondary"
+        },
+        {
+          label: "WhatsApp ile bilgi al",
+          href: dealershipInfo.whatsapp,
+          tone: "primary"
+        }
+      ]
     }
   };
 }

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowRight, MapPin, MessageSquareText, PhoneCall } from "lucide-react";
 import { motion } from "framer-motion";
 
+import { GalleryAdvisor } from "@/components/advisor/gallery-advisor";
 import { HeroSearchPanel } from "@/components/sections/hero-search-panel";
 import { ParallaxMedia } from "@/components/ui/parallax-media";
 import { blurDataURLBySlug, dealershipInfo, vehicles } from "@/lib/gallery-data";
@@ -209,6 +210,11 @@ export function HeroSection() {
 
               <HeroSearchPanel />
             </div>
+
+            <GalleryAdvisor
+              title="Kararsizsaniz once Galeri Danismani ile ilerleyin."
+              description="Sizi uzun uzun form doldurmadan dinler; butce, kasa tipi ve kullanim amaciniza gore stoktan uygun araclari ayirir."
+            />
           </motion.div>
         </div>
       </div>
