@@ -30,7 +30,7 @@ export function Navbar() {
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-x-0 top-0 z-50 border-b border-foreground/10 bg-background/98"
+      className="fixed inset-x-0 top-0 z-50 border-b border-foreground/10 bg-background"
     >
       <div className="page-shell">
         <div
@@ -83,7 +83,7 @@ export function Navbar() {
             </div>
           </div>
 
-          <nav className="mt-3 flex items-center gap-5 overflow-x-auto border-t border-foreground/10 pb-1 pt-3 lg:hidden">
+          <nav className="-mx-4 mt-3 flex items-center gap-5 overflow-x-auto border-t border-foreground/10 bg-background px-4 pb-1 pt-3 sm:-mx-6 sm:px-6 lg:hidden">
             {links.map((link) => {
               const active = link.href === "/gallery" ? pathname === "/gallery" : false;
 
