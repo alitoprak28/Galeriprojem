@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Bodoni_Moda, Manrope } from "next/font/google";
 import type { ReactNode } from "react";
 
+import { GalleryAdvisor } from "@/components/advisor/gallery-advisor";
 import { Footer } from "@/components/layout/footer";
 import { FloatingContact } from "@/components/layout/floating-contact";
 import { Navbar } from "@/components/layout/navbar";
@@ -53,6 +54,7 @@ export default function RootLayout({
 
           <Navbar />
           <FloatingContact />
+          <GalleryAdvisor />
           <main className="relative z-10">{children}</main>
           <Footer />
         </ThemeProvider>
