@@ -54,7 +54,7 @@ export function HeroSearchPanel() {
       </label>
 
       <label className="space-y-2">
-        <span className="text-[10px] uppercase tracking-[0.28em] text-muted">Kasa</span>
+        <span className="text-[10px] uppercase tracking-[0.28em] text-muted">Araç Tipi</span>
         <select
           value={bodyStyle}
           onChange={(event) => setBodyStyle(event.target.value)}
@@ -87,7 +87,7 @@ export function HeroSearchPanel() {
         type="submit"
         className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full border border-accent bg-accent px-5 py-3 text-xs uppercase tracking-[0.22em] text-white transition hover:opacity-90 sm:min-h-0 sm:tracking-[0.28em]"
       >
-        Stok Ara
+        Araç Bul
         <Search className="h-4 w-4" />
       </button>
     </form>

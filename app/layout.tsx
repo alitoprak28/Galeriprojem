@@ -53,7 +53,7 @@ export default function RootLayout({
 
           <Navbar />
           <FloatingContact />
-          <main className="relative z-10 pb-24 md:pb-0">{children}</main>
+          <main className="relative z-10">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>

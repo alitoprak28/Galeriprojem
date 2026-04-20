@@ -75,7 +75,7 @@ export const vehicles: Vehicle[] = [
     seats: "4 koltuk",
     location: "İstanbul / Maslak",
     warranty: "Porsche Approved kontrolü hazır",
-    image: "/artworks/midnight-form.svg",
+    image: "/cars/luxury-sedan-dark.jpg",
     aspect: "portrait",
     description:
       "Kapalı showroom stoklarımızın en hızlı ama en rafine otomobillerinden biri. Düşük kilometresi, şeffaf bakım geçmişi ve hatasız kozmetik durumu ile üst segment müşteri beklentisine doğrudan cevap verir.",
@@ -105,7 +105,7 @@ export const vehicles: Vehicle[] = [
     seats: "5 koltuk",
     location: "İstanbul / Maslak",
     warranty: "Yetkili servis geçmişi eksiksiz",
-    image: "/artworks/silver-drift.svg",
+    image: "/cars/showroom-luxury-front.jpg",
     aspect: "landscape",
     description:
       "Sessizlik, malzeme kalitesi ve arka yaşam alanı odaklı bu konfigürasyon; üst düzey yönetici ve aile kullanımı için özel seçildi.",
@@ -135,7 +135,7 @@ export const vehicles: Vehicle[] = [
     seats: "5 koltuk",
     location: "İstanbul / Maslak",
     warranty: "Audi bakım kayıtları mevcut",
-    image: "/artworks/afterlight-silence.svg",
+    image: "/cars/sedan-silver-side.jpg",
     aspect: "portrait",
     description:
       "RS modelleri içinde hem görsel etki hem kullanım esnekliği açısından en çok talep gören seçeneklerden biri. Boyasız gövdesi ve düşük kilometresi ile öne çıkıyor.",
@@ -165,7 +165,7 @@ export const vehicles: Vehicle[] = [
     seats: "7 koltuk",
     location: "İstanbul / Maslak",
     warranty: "Bakım paketi devam ediyor",
-    image: "/artworks/velour-static.svg",
+    image: "/cars/suv-bmw-front.jpg",
     aspect: "cinema",
     description:
       "Büyük aileler ve makam kullanımı için güçlü bir alternatif. İç mekandaki teknolojik atmosfer ile dışarıdaki görsel ağırlık dengeli biçimde birleşiyor.",
@@ -195,7 +195,7 @@ export const vehicles: Vehicle[] = [
     seats: "5 koltuk",
     location: "İstanbul / Maslak",
     warranty: "Land Rover onaylı bakım geçmişi",
-    image: "/artworks/obsidian-halo.svg",
+    image: "/cars/suv-dark-garage.jpg",
     aspect: "portrait",
     description:
       "Autobiography paketi sayesinde malzeme kalitesi ve arka kabin deneyimi üst seviyede. Düşük kilometresi ve dikkatli kullanım geçmişi ile doğrudan üst segment alıcıya hitap ediyor.",
@@ -225,7 +225,7 @@ export const vehicles: Vehicle[] = [
     seats: "4 koltuk",
     location: "İstanbul / Maslak",
     warranty: "Lexus bakım geçmişi ve ekspertizi hazır",
-    image: "/artworks/atlas-refraction.svg",
+    image: "/cars/suv-white-showroom.jpg",
     aspect: "landscape",
     description:
       "Türkiye pazarında sık rastlanmayan Executive konfigürasyon, arka yaşam alanına odaklanan üst segment alıcı için hazırlandı.",
@@ -255,7 +255,7 @@ export const vehicles: Vehicle[] = [
     seats: "5 koltuk",
     location: "İstanbul / Maslak",
     warranty: "Servis bakımlı",
-    image: "/artworks/silver-drift.svg",
+    image: "/cars/luxury-sedan-dark.jpg",
     aspect: "landscape",
     description:
       "Daha klasik galeri müşterisinin çok aradığı, kolay satılan ve geniş kitleye hitap eden modellerden biridir.",
@@ -285,7 +285,7 @@ export const vehicles: Vehicle[] = [
     seats: "5 koltuk",
     location: "İstanbul / Maslak",
     warranty: "Ekspertiz raporu hazır",
-    image: "/artworks/afterlight-silence.svg",
+    image: "/cars/showroom-luxury-front.jpg",
     aspect: "portrait",
     description:
       "Günlük kullanıma uygun, pazarı hızlı olan ve geniş kitleye hitap eden bir stok. Klasik galeri müşteri akışında çok sorulan araçlardan biridir.",
@@ -315,7 +315,7 @@ export const vehicles: Vehicle[] = [
     seats: "5 koltuk",
     location: "İstanbul / Maslak",
     warranty: "Tramer ve ekspertiz özeti hazır",
-    image: "/artworks/velour-static.svg",
+    image: "/cars/sedan-silver-side.jpg",
     aspect: "cinema",
     description:
       "Sedan pazarında hızlı dönen, aile kullanımına uygun ve showroom ziyaretlerinde sık sorulan araç grubunda yer alır.",
@@ -345,7 +345,7 @@ export const vehicles: Vehicle[] = [
     seats: "5 koltuk",
     location: "İstanbul / Maslak",
     warranty: "Yetkili servis bakımlı",
-    image: "/artworks/obsidian-halo.svg",
+    image: "/cars/luxury-sedan-dark.jpg",
     aspect: "portrait",
     description:
       "Sorunsuzluk algısı ve güçlü ikinci el değeri nedeniyle klasik galeriler için güven veren vitrinin önemli parçasıdır.",
@@ -375,7 +375,7 @@ export const vehicles: Vehicle[] = [
     seats: "5 koltuk",
     location: "İstanbul / Maslak",
     warranty: "Kaporta ve ekspertiz raporu hazır",
-    image: "/artworks/atlas-refraction.svg",
+    image: "/cars/suv-dark-garage.jpg",
     aspect: "landscape",
     description:
       "SUV arayan müşterilerin fiyat, donanım ve görünüm arasında kolay karar verdiği modellerden biridir.",
@@ -405,7 +405,7 @@ export const vehicles: Vehicle[] = [
     seats: "5 koltuk",
     location: "İstanbul / Maslak",
     warranty: "Ekspertiz ve servis özetleri hazır",
-    image: "/artworks/midnight-form.svg",
+    image: "/cars/luxury-sedan-dark.jpg",
     aspect: "portrait",
     description:
       "Dayanıklılığı ve ikinci elde güçlü talebi sayesinde klasik galerilerde sürekli sorulan araç grubunda yer alır.",
