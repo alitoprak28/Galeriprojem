@@ -101,6 +101,7 @@ function AdvisorRecommendationCard({
 export function GalleryAdvisor() {
   const {
     isOpen,
+    isReady,
     setIsOpen,
     input,
     setInput,
@@ -110,11 +111,12 @@ export function GalleryAdvisor() {
     quickActions,
     sendMessage,
     handleQuickAction
-  } = useGalleryAdvisor({ initialOpen: true });
+  } = useGalleryAdvisor({ autoOpenDelayMs: 10000 });
   const bodyRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const titleId = useId();
-  const showQuickActions = messages.length <= 1;
+  const conversationMessages = messages.filter((message) => message.id !== "welcome");
+  const showQuickActions = conversationMessages.length === 0;
 
   useEffect(() => {
     const viewport = bodyRef.current;
@@ -181,14 +183,14 @@ export function GalleryAdvisor() {
           />
 
           <div
-            className="absolute inset-x-3 bottom-3 top-auto flex justify-center md:inset-x-auto md:bottom-6 md:right-6"
+            className="absolute inset-x-2 bottom-2 top-auto flex justify-center sm:inset-x-3 sm:bottom-3 md:inset-x-auto md:bottom-6 md:right-6"
             style={{ paddingBottom: "max(0px, env(safe-area-inset-bottom))" }}
           >
             <section
               role="dialog"
               aria-modal="true"
               aria-labelledby={titleId}
-              className="relative flex max-h-[min(76svh,44rem)] w-full max-w-[27rem] flex-col overflow-hidden rounded-[28px] border border-foreground/10 bg-panel shadow-[0_30px_90px_rgba(15,23,42,0.18)]"
+              className="relative flex max-h-[min(78svh,42rem)] w-full max-w-[27rem] flex-col overflow-hidden rounded-[24px] border border-foreground/10 bg-panel shadow-[0_28px_80px_rgba(15,23,42,0.16)] sm:rounded-[28px] md:max-h-[min(76svh,44rem)]"
               onClick={(event) => event.stopPropagation()}
             >
               <div className="border-b border-foreground/10 px-4 py-4 sm:px-5">
@@ -202,7 +204,7 @@ export function GalleryAdvisor() {
                     <div className="space-y-2">
                       <h2
                         id={titleId}
-                        className="font-display text-[1.45rem] uppercase leading-[0.92] tracking-[-0.04em] text-foreground sm:text-[1.8rem]"
+                        className="font-display text-[1.2rem] uppercase leading-[0.94] tracking-[-0.04em] text-foreground sm:text-[1.8rem]"
                       >
                         Size uygun araci birlikte bulalim.
                       </h2>
@@ -223,13 +225,13 @@ export function GalleryAdvisor() {
                 </div>
 
                 {showQuickActions ? (
-                  <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                  <div className="mt-4 grid grid-cols-2 gap-2">
                     {quickActions.map((action) => (
                       <button
                         key={action.id}
                         type="button"
                         onClick={() => handleQuickAction(action.prompt)}
-                        className="min-h-[2.8rem] rounded-[18px] border border-foreground/10 bg-background px-3 py-2 text-[10px] uppercase tracking-[0.16em] text-muted transition hover:border-foreground/20 hover:text-foreground"
+                        className="min-h-[2.8rem] rounded-[16px] border border-foreground/10 bg-background px-3 py-2 text-[10px] uppercase tracking-[0.14em] text-muted transition hover:border-foreground/20 hover:text-foreground"
                       >
                         {action.label}
                       </button>
@@ -242,7 +244,7 @@ export function GalleryAdvisor() {
                 ref={bodyRef}
                 className="min-h-0 flex-1 space-y-3 overflow-y-auto px-4 py-4 sm:px-5"
               >
-                {messages.map((message) => (
+                {conversationMessages.map((message) => (
                   <div
                     key={message.id}
                     className={cn("flex", message.role === "user" ? "justify-end" : "justify-start")}
@@ -329,6 +331,12 @@ export function GalleryAdvisor() {
                     {error}
                   </div>
                 ) : null}
+
+                {showQuickActions ? (
+                  <div className="rounded-[18px] border border-foreground/10 bg-background px-4 py-4 text-sm leading-6 text-muted">
+                    Butceniz, arac tipi ya da kullanim amacinizla baslayabilirsiniz. Ben size uygun ilanlari kisa yoldan ayirayim.
+                  </div>
+                ) : null}
               </div>
 
               <form onSubmit={handleSubmit} className="border-t border-foreground/10 p-4 sm:p-5">
@@ -348,7 +356,7 @@ export function GalleryAdvisor() {
                       Kisa ve net cevaplarla ilerler.
                     </div>
 
-                    <div className="flex flex-col gap-2 sm:flex-row">
+                    <div className="grid gap-2 sm:grid-cols-[1fr_auto]">
                       <button
                         type="submit"
                         disabled={isThinking || input.trim().length === 0}
@@ -372,7 +380,7 @@ export function GalleryAdvisor() {
             </section>
           </div>
         </div>
-      ) : (
+      ) : isReady ? (
         <button
           type="button"
           onClick={() => setIsOpen(true)}
@@ -383,7 +391,7 @@ export function GalleryAdvisor() {
           <Bot className="h-4 w-4" />
           <span>Galeri Danismani</span>
         </button>
-      )}
+      ) : null}
     </>
   );
 }
