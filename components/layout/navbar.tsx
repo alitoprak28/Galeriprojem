@@ -30,19 +30,19 @@ export function Navbar() {
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-x-0 top-0 z-50"
+      className="fixed inset-x-0 top-0 z-50 border-b border-foreground/10 bg-background/94 backdrop-blur-xl"
     >
-      <div className="page-shell pt-4 sm:pt-6">
+      <div className="page-shell">
         <div
           className={cn(
-            "rounded-[26px] border bg-background/95 px-3 py-3 backdrop-blur-xl transition-all duration-300 sm:px-5 sm:py-4 lg:px-6",
+            "px-0 py-2 transition-all duration-300 sm:px-0 sm:py-3",
             scrolled
-              ? "border-foreground/10 shadow-panel"
-              : "border-foreground/10 shadow-[0_18px_48px_rgba(15,23,42,0.06)]"
+              ? "shadow-[0_14px_30px_rgba(15,23,42,0.06)]"
+              : ""
           )}
         >
-          <div className="flex items-start justify-between gap-3">
-            <Link href="/" className="group inline-flex min-w-0 items-center gap-3">
+          <div className="flex items-start justify-between gap-3 px-1 py-1 sm:px-0">
+            <Link href="/" className="group inline-flex min-w-0 items-center gap-3 py-2">
               <span className="h-2.5 w-2.5 rounded-sm bg-accent" />
               <div className="min-w-0">
                 <p className="truncate font-display text-[13px] uppercase tracking-[0.14em] text-foreground sm:text-xl">
@@ -85,7 +85,7 @@ export function Navbar() {
             </div>
           </div>
 
-          <nav className="mt-3 grid grid-cols-2 gap-2 border-t border-foreground/10 pt-3 lg:hidden">
+          <nav className="mt-2 grid grid-cols-2 gap-2 border-t border-foreground/10 pt-3 lg:hidden">
             {links.map((link) => {
               const active = link.href === "/gallery" ? pathname === "/gallery" : false;
 
@@ -94,7 +94,7 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "inline-flex min-h-11 items-center justify-center rounded-2xl border border-foreground/10 bg-foreground/[0.03] px-4 py-3 text-[10px] font-medium uppercase tracking-[0.18em] text-muted transition hover:border-foreground/20 hover:text-foreground sm:text-[11px]",
+                    "inline-flex min-h-11 items-center justify-center rounded-xl border border-foreground/10 bg-foreground/[0.03] px-4 py-3 text-[10px] font-medium uppercase tracking-[0.18em] text-muted transition hover:border-foreground/20 hover:text-foreground sm:text-[11px]",
                     active && "border-accent/20 bg-accent text-white shadow-sm hover:text-white"
                   )}
                 >
