@@ -12,8 +12,12 @@ import {
 
 const thinkingDelayMs = 650;
 
-export function useGalleryAdvisor() {
-  const [isOpen, setIsOpen] = useState(false);
+type UseGalleryAdvisorOptions = {
+  initialOpen?: boolean;
+};
+
+export function useGalleryAdvisor({ initialOpen = false }: UseGalleryAdvisorOptions = {}) {
+  const [isOpen, setIsOpen] = useState(initialOpen);
   const [input, setInput] = useState("");
   const [isThinking, setIsThinking] = useState(false);
   const [error, setError] = useState<string | null>(null);

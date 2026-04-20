@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { MessageSquareText, PhoneCall } from "lucide-react";
 
-import { GalleryAdvisor } from "@/components/advisor/gallery-advisor";
 import { InventoryBrowser } from "@/components/gallery/inventory-browser";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -62,13 +61,6 @@ export default function GalleryPage({ searchParams }: GalleryPageProps) {
               </div>
               <MessageSquareText className="h-5 w-5 text-foreground" />
             </a>
-          </Reveal>
-
-          <Reveal delay={0.04}>
-            <GalleryAdvisor
-              title="Stok icinde kararsizsaniz size uygun araci birlikte ayiralim."
-              description="Bir kac kisa cevapla SUV, sedan, aile araci ya da premium secenekleri stoktan filtreleyip sizi dogru ilana yonlendirelim."
-            />
           </Reveal>
 
           <Reveal className="text-sm leading-7 text-muted">

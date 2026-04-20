@@ -92,7 +92,7 @@ export const initialAdvisorMessage: AdvisorMessage = {
   id: "welcome",
   role: "assistant",
   text:
-    "Merhaba, ben Galeri Danismani. Butcenizi, kasa tercihinizi ya da kullanim amacinizi yazin; size stoktan uygun araclari ayirayim.",
+    "Merhaba, ben Galeri Danismani. Isterseniz birkac kisa soruyla size uygun araci birlikte belirleyelim.",
   actions: contactActions
 };
 
@@ -380,7 +380,7 @@ function buildReason(vehicle: Vehicle, preferences: AdvisorPreferences) {
     reasons.push("Stokta dikkat ceken bir secenek");
   }
 
-  return reasons.slice(0, 2).join(" • ");
+  return reasons.slice(0, 2).join(" / ");
 }
 
 function toRecommendation(vehicle: Vehicle, preferences: AdvisorPreferences): AdvisorRecommendation {
@@ -543,7 +543,7 @@ export function createAdvisorReply(
         id: `assistant-contact-${Date.now()}`,
         role: "assistant",
         text:
-          "Tabii. Satis ekibimize hemen gecebilirsiniz. WhatsApp ya da telefon tarafindan aninda destek alabilirsiniz.",
+          "Tabii, sizi hizlica satis ekibimize yonlendirebilirim. WhatsApp ya da telefon tarafindan aninda bilgi alabilirsiniz.",
         actions: contactActions
       }
     };
@@ -579,7 +579,7 @@ export function createAdvisorReply(
       message: {
         id: `assistant-question-${Date.now()}`,
         role: "assistant",
-        text: `Size daha net arac ayirabilmem icin bir bilgi daha alayim. ${askQuestion}`
+        text: `Size daha net arac onerebilmem icin bir bilgi daha alayim. ${askQuestion}`
       }
     };
   }
@@ -593,7 +593,7 @@ export function createAdvisorReply(
         id: `assistant-empty-${Date.now()}`,
         role: "assistant",
         text:
-          "Bu kriterlere tam oturan stok cikmadi. Butceyi biraz esnetirsek ya da kasa tipini genisletirsek daha guclu secenekler cikarabilirim.",
+          "Bu kriterlere tam oturan bir ilan cikmadi. Butceyi biraz esnetirsek ya da kasa tipini genisletirsek daha guclu secenekler cikarabilirim.",
         actions: [
           {
             label: "Tum stoklari ac",
@@ -618,8 +618,8 @@ export function createAdvisorReply(
       id: `assistant-reco-${Date.now()}`,
       role: "assistant",
       text: summary
-        ? `${summary} size uygun olabilecek ilanlari ayirdim. Detaya gecebilir ya da hizli bilgi icin bize yazabilirsiniz.`
-        : "Size uygun olabilecek ilanlari ayirdim. Detaya gecebilir ya da hizli bilgi icin bize yazabilirsiniz.",
+        ? `${summary} size uygun olabilecek ilanlari ayirdim. Isterseniz detay sayfasina gecin ya da hizli bilgi icin bize yazin.`
+        : "Size uygun olabilecek ilanlari ayirdim. Isterseniz detay sayfasina gecin ya da hizli bilgi icin bize yazin.",
       recommendations,
       actions: [
         {

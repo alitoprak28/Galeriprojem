@@ -4,7 +4,7 @@ import { dealershipInfo } from "@/lib/gallery-data";
 
 export function FloatingContact() {
   return (
-    <div className="fixed bottom-4 right-4 z-50 hidden flex-col gap-3 md:flex">
+    <div className="floating-contact fixed bottom-4 right-4 z-50 hidden flex-col gap-3 transition-all duration-300 md:flex">
       <a
         href={dealershipInfo.whatsapp}
         className="inline-flex items-center gap-3 border border-foreground/10 bg-background/90 px-5 py-4 text-xs uppercase tracking-[0.28em] text-foreground shadow-panel backdrop-blur-xl transition hover:border-foreground/20 hover:bg-background"
