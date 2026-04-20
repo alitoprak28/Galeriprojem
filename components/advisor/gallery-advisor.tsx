@@ -183,14 +183,14 @@ export function GalleryAdvisor() {
           />
 
           <div
-            className="absolute inset-x-2 bottom-2 top-auto flex justify-center sm:inset-x-3 sm:bottom-3 md:inset-x-auto md:bottom-6 md:right-6"
+            className="absolute inset-x-0 bottom-0 top-auto flex justify-center md:inset-x-auto md:bottom-6 md:right-6"
             style={{ paddingBottom: "max(0px, env(safe-area-inset-bottom))" }}
           >
             <section
               role="dialog"
               aria-modal="true"
               aria-labelledby={titleId}
-              className="relative flex max-h-[min(78svh,42rem)] w-full max-w-[27rem] flex-col overflow-hidden rounded-[24px] border border-foreground/10 bg-panel shadow-[0_28px_80px_rgba(15,23,42,0.16)] sm:rounded-[28px] md:max-h-[min(76svh,44rem)]"
+              className="relative flex max-h-[90svh] w-full flex-col overflow-y-auto rounded-t-[28px] border border-foreground/10 bg-panel shadow-[0_28px_80px_rgba(15,23,42,0.16)] md:max-h-[min(78svh,46rem)] md:w-[32rem] md:max-w-[32rem] md:rounded-[28px] md:overflow-hidden"
               onClick={(event) => event.stopPropagation()}
             >
               <div className="border-b border-foreground/10 px-4 py-4 sm:px-5">
@@ -240,10 +240,7 @@ export function GalleryAdvisor() {
                 ) : null}
               </div>
 
-              <div
-                ref={bodyRef}
-                className="min-h-0 flex-1 space-y-3 overflow-y-auto px-4 py-4 sm:px-5"
-              >
+              <div ref={bodyRef} className="space-y-3 px-4 py-4 sm:px-5 md:min-h-0 md:flex-1 md:overflow-y-auto">
                 {conversationMessages.map((message) => (
                   <div
                     key={message.id}
@@ -251,7 +248,7 @@ export function GalleryAdvisor() {
                   >
                     <div
                       className={cn(
-                        "max-w-[95%] rounded-[22px] border px-4 py-3",
+                        "max-w-full rounded-[22px] border px-4 py-3 md:max-w-[95%]",
                         message.role === "user"
                           ? "border-foreground bg-foreground text-white"
                           : "border-foreground/10 bg-background text-foreground"
@@ -350,7 +347,7 @@ export function GalleryAdvisor() {
                     onChange={(event) => setInput(event.target.value)}
                     rows={2}
                     placeholder="Ornek: 2 milyon civari, aile kullanimi icin SUV bakiyorum."
-                    className="min-h-[4.5rem] w-full resize-none bg-transparent text-sm leading-6 text-foreground outline-none placeholder:text-muted"
+                    className="min-h-[5.5rem] w-full resize-none bg-transparent text-sm leading-6 text-foreground outline-none placeholder:text-muted"
                   />
 
                   <div className="mt-3 flex flex-col gap-3 border-t border-foreground/10 pt-3">
