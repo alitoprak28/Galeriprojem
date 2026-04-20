@@ -332,15 +332,18 @@ export function GalleryAdvisor() {
                   </div>
                 ) : null}
 
-                {showQuickActions ? (
-                  <div className="rounded-[18px] border border-foreground/10 bg-background px-4 py-4 text-sm leading-6 text-muted">
-                    Butceniz, arac tipi ya da kullanim amacinizla baslayabilirsiniz. Ben size uygun ilanlari kisa yoldan ayirayim.
-                  </div>
-                ) : null}
               </div>
 
               <form onSubmit={handleSubmit} className="border-t border-foreground/10 p-4 sm:p-5">
                 <div className="rounded-[22px] border border-foreground/10 bg-background/90 p-3">
+                  {showQuickActions ? (
+                    <div className="mb-3 rounded-[18px] border border-foreground/10 bg-accent/[0.06] px-4 py-3">
+                      <p className="text-[15px] leading-7 text-foreground sm:text-base">
+                        Butceniz, arac tipi ya da kullanim amacinizi yazin; size uygun ilanlari hemen ayirayim.
+                      </p>
+                    </div>
+                  ) : null}
+
                   <textarea
                     ref={textareaRef}
                     value={input}
